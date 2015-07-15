@@ -34,16 +34,28 @@ var Player = function() {
 }
 
 Player.prototype.update = function(dt) {
-    
+   
 }
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-Player.prototype.handleInput = function() {
-
-}
+Player.prototype.handleInput = function(keyCode) {
+    //Move player up
+    if (keyCode == 'up') {
+        this.y -= 90;
+    }
+    if (keyCode == 'down') {
+        this.y += 90;
+    }
+    if (keyCode == 'left') {
+        this.x -= 90;
+    }
+    if (keyCode == 'right') {
+        this.x += 90;
+    }
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -62,5 +74,5 @@ document.addEventListener('keyup', function(e) {
         40: 'down'
     };
 
-    player.handleInput(allowedKeys[e.keyCode]);
+    player.handleInput(allowedKeys[e.keyCode]);   
 });
