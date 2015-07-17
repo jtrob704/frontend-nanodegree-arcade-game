@@ -48,6 +48,10 @@ Player.prototype.update = function (dt) {
 
 };
 
+Player.prototype.reset = function () {
+
+}
+
 Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -61,18 +65,18 @@ Player.prototype.handleInput = function (keyCode) {
     }
     if (keyCode === 'down') {
         if (this.y < 390) {
-        this.y += 82;
-    }
+            this.y += 82;
+        }
     }
     if (keyCode === 'left') {
         if (this.x > 20) {
-        this.x -= 73;
-    }
+            this.x -= 73;
+        }
     }
     if (keyCode === 'right') {
         if (this.x < 350) {
-        this.x += 73;
-    }
+            this.x += 73;
+        }
     }
 };
 
