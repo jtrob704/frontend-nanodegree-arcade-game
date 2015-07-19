@@ -104,7 +104,7 @@ Player.prototype.handleInput = function (keyCode) {
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [new Enemy(1), new Enemy(2), new Enemy(3)];
 // 
-for (var i = 0; i < allEnemies.length; i++) {
+for (var i = 0, len = allEnemies.length; i < len; i++) {
     allEnemies[i].reset();
 }
 // Place the player object in a variable called player
