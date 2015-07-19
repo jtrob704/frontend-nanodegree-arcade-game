@@ -1,6 +1,10 @@
-frontend-nanodegree-arcade-game
+Arcade game
 ===============================
+By J.T. Robinson
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+Navigate the player to the safety of the river.
 
-for self-checking their submission.
+Instructions:
+
+Use the keyboard arrow keys to navigate the character up, down, left and right.
+Be carful and avoid the bugs and water or you will have to restart from your original position.
