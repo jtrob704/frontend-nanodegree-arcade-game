@@ -6,6 +6,8 @@ var Enemy = function (lanes) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.height = 50;
+    this.width = 50;
     this.y = -20 + (lanes * 80);
 };
 
@@ -16,15 +18,25 @@ Enemy.prototype.update = function (dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += (dt * 100 + this.speed);
-    // If an enemy object moves out of the screen, it resets
-    // back to its origin with a new speed value.
+
+    /* Axis-aligned bounding box collision detection based on code from
+     * Mozilla developer network: 
+     * https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+     */
+    if (this.x < player.x + player.width &&
+            this.x + this.width > player.x &&
+            this.y < player.y + player.height &&
+            this.height + this.y > player.y) {
+        player.reset();
+    }
+    //If enemy goes off screen reset with a new speed value.
     if (this.x > 615) {
-        this.visible();
+        this.reset();
     }
 };
 
-
-Enemy.prototype.visible = function () {
+//Redraw enemies off screen with a new speed value
+Enemy.prototype.reset = function () {
     this.x = -100;
     this.speed = Math.floor((Math.random() * 4));
 };
@@ -39,18 +51,25 @@ Enemy.prototype.render = function () {
 // a handleInput() method.
 var Player = function () {
     this.sprite = 'images/char-boy.png';
+    this.height = 50;
+    this.width = 50;
     this.x = 200;
     this.y = 400;
 
 };
 
+// If player reaches the water invoke player reset method
 Player.prototype.update = function (dt) {
-
+    if (this.y < 50) {
+        this.reset();
+    }
 };
 
+// Resets player to initial start position
 Player.prototype.reset = function () {
-
-}
+    this.x = 200;
+    this.y = 400;
+};
 
 Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -83,9 +102,9 @@ Player.prototype.handleInput = function (keyCode) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [new Enemy(1), new Enemy(2), new Enemy(3)];
-// Spawn them in the game world
+// 
 for (var i = 0; i < allEnemies.length; i++) {
-    allEnemies[i].visible();
+    allEnemies[i].reset();
 }
 // Place the player object in a variable called player
 var player = new Player();
